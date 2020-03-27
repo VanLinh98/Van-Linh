@@ -2,32 +2,34 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/itemprofic">
 
     <!-- Name -->
-    <TextView android:id="@+id/name"
+    <TextView android:id="@+id/nameprofic"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="28dip"
-        android:paddingLeft="15dip"
-        android:layout_marginTop="15dip"/>
+        android:textSize="28dp"
+        android:paddingLeft="15dp"
+        android:layout_marginTop="15dp"
+        />
 
-    <TextView android:id="@+id/email"
+    <TextView android:id="@+id/emailprofic"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dip"
-        android:paddingLeft="15dip"/>
+        android:textSize="20dp"
+        android:paddingLeft="15dp"/>
 
-    <TextView android:id="@+id/address"
+    <TextView android:id="@+id/addressprofic"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="21dip"
-        android:paddingLeft="15dip"/>
+        android:textSize="21dp"
+        android:paddingLeft="15dp"/>
 
-    <TextView android:id="@+id/gioitinh"
+    <TextView android:id="@+id/gioitinhprofic"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dip"
-        android:paddingLeft="15dip"/>
+        android:textSize="20dp"
+        android:paddingLeft="15dp"/>
 
 </LinearLayout>

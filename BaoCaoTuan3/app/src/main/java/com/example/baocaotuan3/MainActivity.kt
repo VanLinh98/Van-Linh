@@ -2,15 +2,16 @@ package com.example.baocaotuan3
 
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.example.baocaotuan3.activity.XulyMail
+import androidx.appcompat.app.AppCompatActivity
 import com.example.baocaotuan3.activity.XulyDangKy
+import com.example.baocaotuan3.activity.XulyMail
 import com.example.sheek2.Data.UserDatabase
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.*
-import java.lang.Exception
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 
 open class MainActivity : AppCompatActivity() {
 
@@ -31,7 +32,6 @@ open class MainActivity : AppCompatActivity() {
     }
 
     fun main(){
-
         runBlocking {
             loadroom()
         }
@@ -45,6 +45,14 @@ open class MainActivity : AppCompatActivity() {
                 if(userdn.username == name && userdn.password == pass){
                     val xulymail : Intent = Intent(this@MainActivity,
                         XulyMail::class.java)
+
+                        val extras = Bundle()
+                        extras.putString("key1", userdn.username)
+                        extras.putString("key2", userdn.email)
+                        extras.putString("key3", userdn.address)
+                        extras.putBoolean("key4", userdn.gender!!)
+
+                        xulymail.putExtras(extras)
                         startActivity(xulymail)
                 }else{
                     Log.d("AAA","Thất bại")

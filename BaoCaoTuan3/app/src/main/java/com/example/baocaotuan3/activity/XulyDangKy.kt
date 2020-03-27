@@ -24,16 +24,11 @@ class XulyDangKy : AppCompatActivity() {
         }
     }
     fun main(){
-        GlobalScope.launch {
-            delay(500)
+      runBlocking{
             insertdata(Dangky())
         }
-        runBlocking {
-
-            Dangky()
-        }
     }
-    suspend fun Dangky(): dataUser {
+    fun Dangky(): dataUser {
         var username = edittdn.text
         var pass = editmk.text
         var mail = editemail.text
