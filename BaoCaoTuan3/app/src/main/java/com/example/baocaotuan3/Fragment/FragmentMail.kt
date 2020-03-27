@@ -36,8 +36,4 @@ class FragmentMail: Fragment() {
         return view
     }
 
-    fun loadDataItn()
-    {
-
-    }
 }
