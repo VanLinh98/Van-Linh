@@ -7,18 +7,17 @@ import androidx.lifecycle.viewModelScope
 import com.example.myapplication.Model.CityModel
 import com.example.myapplication.Model.WeatherModel
 import com.example.myapplication.Database.WordRoomDatabase
-import com.example.myapplication.Repository.WordRepository
+import com.example.myapplication.Repository.WeatherRepository
 import kotlinx.coroutines.launch
 
-class WordViewModel(application: Application) : AndroidViewModel(application) {
+class WeatherView(application: Application) : AndroidViewModel(application) {
 
-    private val repository: WordRepository
+    private val repository: WeatherRepository
     val allWords: LiveData<List<CityModel>>
     val getone : CityModel
     init {
         val wordsDao = WordRoomDatabase.getDatabase(application, viewModelScope).wordDao()
-        repository =
-            WordRepository(wordsDao)
+        repository = WeatherRepository(wordsDao)
         allWords = repository.allWords
         getone = repository.getcity
     }

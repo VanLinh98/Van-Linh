@@ -10,14 +10,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.Adapter.AdapterHistory
 import com.example.myapplication.Model.CityModel
-import com.example.myapplication.View.WordViewModel
+import com.example.myapplication.View.WeatherView
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity()  {
 
-    lateinit var wordViewModel: WordViewModel
+    lateinit var wordViewModel: WeatherView
     var arraylist = ArrayList<CityModel>()
     val adapter = AdapterHistory(arraylist)
+    val url = "http://api.worldweatheronline.com/premium/v1/search.ashx?format=json&key=e2093a0d363d40d7a4982453202704&query="
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -26,7 +27,7 @@ class MainActivity : AppCompatActivity()  {
         rv_history.layoutManager = LinearLayoutManager(this@MainActivity)
         rv_history.setLayoutManager(LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false))
 
-        wordViewModel = ViewModelProvider(this).get(WordViewModel::class.java)
+        wordViewModel = ViewModelProvider(this).get(WeatherView::class.java)
         wordViewModel.allWords.observe(this, Observer<List<CityModel>> {
             val list : MutableList<CityModel> = mutableListOf()
             for (i in 0..it.size-1)
@@ -45,13 +46,13 @@ class MainActivity : AppCompatActivity()  {
 
             override fun onQueryTextSubmit(query: String): Boolean {
                 tvhistory.visibility = View.GONE
-                arraylist = wordViewModel.getSearch("http://api.worldweatheronline.com/premium/v1/search.ashx?format=json&key=e2093a0d363d40d7a4982453202704&query="+query+"")
+                arraylist = wordViewModel.getSearch(url +query+"")
                 adapter.setWords(arraylist)
                 return true
             }
             override fun onQueryTextChange(newText: String): Boolean {
                 tvhistory.visibility = View.GONE
-                wordViewModel = ViewModelProvider(this@MainActivity).get(WordViewModel::class.java)
+                wordViewModel = ViewModelProvider(this@MainActivity).get(WeatherView::class.java)
                 wordViewModel.allWords.observe(this@MainActivity, Observer<List<CityModel>> {
                     val citysearch : MutableList<CityModel> = mutableListOf()
                     val cityhistory : MutableList<CityModel> = mutableListOf()
@@ -62,7 +63,7 @@ class MainActivity : AppCompatActivity()  {
                     for (i in 0 .. citysearch.size -1)
                     {
                         if (citysearch[i].toString().contains(newText))
-                            cityhistory.add(0,citysearch.get(i))
+                            cityhistory.add(citysearch[i])
                     }
                     adapter.setWords(cityhistory)
                     adapter.notifyDataSetChanged()
@@ -75,12 +76,13 @@ class MainActivity : AppCompatActivity()  {
     }
 
     override fun onRestart() {
+
         tvhistory.visibility=View.VISIBLE
         rv_history.adapter = adapter
         rv_history.layoutManager = LinearLayoutManager(this@MainActivity)
         rv_history.setLayoutManager(LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false))
 
-        wordViewModel = ViewModelProvider(this).get(WordViewModel::class.java)
+        wordViewModel = ViewModelProvider(this).get(WeatherView::class.java)
         wordViewModel.allWords.observe(this, Observer<List<CityModel>> {
             val list : MutableList<CityModel> = mutableListOf()
             for (i in 0..it.size-1)

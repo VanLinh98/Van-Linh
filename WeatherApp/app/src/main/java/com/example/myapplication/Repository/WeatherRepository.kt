@@ -13,9 +13,9 @@ import java.lang.StringBuilder
 import java.net.MalformedURLException
 import java.net.URL
 
-class WordRepository(private val wordDao: WordDao) {
+class WeatherRepository(private val wordDao: WordDao) {
 
-    val allWords: LiveData<List<CityModel>> = wordDao.getAlphabetizedWords()
+    val allWords: LiveData<List<CityModel>> = wordDao.getDataCity()
     val getcity : CityModel = wordDao.getcity()
 
     suspend fun insert(model: CityModel) {
@@ -32,9 +32,9 @@ class WordRepository(private val wordDao: WordDao) {
     fun getCityModel(cityModel : String) : Boolean
     {
        val cityModel = wordDao.GetCityModel(cityModel)
-        if (cityModel == null) // Không có
+        if (cityModel == null)
             return true
-        else // Có
+        else
             return false
     }
     suspend fun getResponse(query: String) : String
@@ -108,14 +108,10 @@ class WordRepository(private val wordDao: WordDao) {
                 val JSONObject = jsonArray.getJSONObject(i)
                 val temC = JSONObject.getString("temp_C")
                 val weatherDesc = JSONObject.getJSONArray("weatherDesc").getJSONObject(0).getString("value")
-                val weatherIconUrl = JSONObject.getJSONArray("weatherIconUrl").getJSONObject(0).getString("value")
                 val hudimy = JSONObject.getString("humidity")
-                weather = WeatherModel(
-                    temC,
-                    weatherDesc,
-                    hudimy,
-                    weatherIconUrl
-                )
+                val weatherIconUrl = JSONObject.getJSONArray("weatherIconUrl").getJSONObject(0).getString("value")
+
+                weather = WeatherModel(temC, weatherDesc, hudimy, weatherIconUrl)
             }
         }
         catch (e: IOException) {

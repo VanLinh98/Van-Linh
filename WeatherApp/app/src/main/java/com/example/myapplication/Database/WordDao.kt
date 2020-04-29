@@ -8,7 +8,7 @@ import com.example.myapplication.Model.CityModel
 interface WordDao {
 
     @Query("SELECT * FROM city_table LIMIT 10")
-    fun getAlphabetizedWords(): LiveData<List<CityModel>>
+    fun getDataCity(): LiveData<List<CityModel>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(model: CityModel)
