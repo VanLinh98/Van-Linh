@@ -42,9 +42,11 @@ class MainActivityTest{
     {
         onView(withId(R.id.MenuSearch)).check(matches(isDisplayed()))
         onView(withId(R.id.rv_history)).check(matches(isDisplayed()))
-        onView(withId(R.id.MenuSearch)).perform(SearchViewActionExtension.typeText("Ha Noi"), closeSoftKeyboard())
+        onView(withId(R.id.MenuSearch)).perform(SearchViewActionExtension.typeText("Ho Chi Minh"), closeSoftKeyboard())
         onView(withId(R.id.MenuSearch)).perform(click())
-        onView(withId(R.id.MenuSearch)).perform(SearchViewActionExtension.submitText("HaNoi"), closeSoftKeyboard())
+        onView(withId(R.id.rv_history)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, ViewActions.click()))
+        Espresso.pressBack()
+        onView(withId(R.id.MenuSearch)).perform(SearchViewActionExtension.submitText("Ha Noi"), closeSoftKeyboard())
         onView(withId(R.id.MenuSearch)).perform(click())
         onView(withId(R.id.rv_history)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, ViewActions.click()))
         Espresso.pressBack()

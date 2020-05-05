@@ -16,16 +16,16 @@ abstract class WordRoomDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: WordRoomDatabase? = null
 
-        fun getDatabase(
-            context: Context,
-            scope: CoroutineScope
-        ): WordRoomDatabase {
+        fun getDatabase(context: Context, scope: CoroutineScope): WordRoomDatabase? {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    WordRoomDatabase::class.java,
-                    "city_database"
+                        context.applicationContext,
+                        WordRoomDatabase::class.java,
+                        "city_database"
                 ).fallbackToDestructiveMigration().allowMainThreadQueries().build()
+/*Cho phép Room tạo lại các bảng cơ sở dữ liệu
+một cách triệt để nếu Migrationkhông tìm thấy các
+lược đồ cơ sở dữ liệu cũ sang phiên bản lược đồ mới nhất.*/
                 INSTANCE = instance
                 instance
             }

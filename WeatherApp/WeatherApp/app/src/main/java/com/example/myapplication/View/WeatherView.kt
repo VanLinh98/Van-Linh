@@ -16,7 +16,7 @@ class WeatherView(application: Application) : AndroidViewModel(application) {
     val allWords: LiveData<List<CityModel>>
     val getone : CityModel
     init {
-        val wordsDao = WordRoomDatabase.getDatabase(application, viewModelScope).wordDao()
+        val wordsDao = WordRoomDatabase.getDatabase(application, viewModelScope)!!.wordDao()
         repository = WeatherRepository(wordsDao)
         allWords = repository.allWords
         getone = repository.getcity
