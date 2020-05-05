@@ -18,8 +18,10 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class MainActivityTest{
 
-    @Rule
-    @JvmField
+    @Rule //quy tắc test JUnit4
+    @JvmField //chỉ thị trình biên dịch không tạo ra các getters và setters cho thuộc tính
+    /*khai báo cho Espresso biết Activity nào để mở hoặc khởi động trước
+     khi thực hiện và phá hủy sau khi thực hiện bất kỳ phương thức test nào.*/
     var activityRule = ActivityTestRule<MainActivity>(
         MainActivity::class.java)
 
@@ -27,7 +29,6 @@ class MainActivityTest{
     fun view_dislay()
     {
         onView(withId(R.id.MenuSearch)).check(matches(isDisplayed()))
-        onView(withId(R.id.tvhistory)).check(matches(isDisplayed())).check(matches(withText("History Search")))
         onView(withId(R.id.rv_history)).check(matches(isDisplayed()))
     }
     @Test
@@ -36,14 +37,14 @@ class MainActivityTest{
         onView(withId(R.id.rv_history)).perform(RecyclerViewActions.actionOnItemAtPosition<AdapterHistory.ViewHolder>(1, click()))
     }
     @Test
+    @Throws(Exception::class)
     fun search()
     {
         onView(withId(R.id.MenuSearch)).check(matches(isDisplayed()))
-        onView(withId(R.id.tvhistory)).check(matches(isDisplayed())).check(matches(withText("History Search")))
         onView(withId(R.id.rv_history)).check(matches(isDisplayed()))
-        onView(withId(R.id.MenuSearch)).perform(SearchViewActionExtension.typeText("sin"), closeSoftKeyboard())
+        onView(withId(R.id.MenuSearch)).perform(SearchViewActionExtension.typeText("Ha Noi"), closeSoftKeyboard())
         onView(withId(R.id.MenuSearch)).perform(click())
-        onView(withId(R.id.MenuSearch)).perform(SearchViewActionExtension.submitText("sin"), closeSoftKeyboard())
+        onView(withId(R.id.MenuSearch)).perform(SearchViewActionExtension.submitText("HaNoi"), closeSoftKeyboard())
         onView(withId(R.id.MenuSearch)).perform(click())
         onView(withId(R.id.rv_history)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, ViewActions.click()))
         Espresso.pressBack()
