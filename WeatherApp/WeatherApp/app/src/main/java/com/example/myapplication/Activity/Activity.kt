@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.weather_layout.*
 
 class Activity() : AppCompatActivity() {
 
-    lateinit var query : String
+    lateinit var cityWeather : String
     lateinit var cityModel: CityModel
     private lateinit var wordViewModel: WeatherView
     val url = "http://api.worldweatheronline.com/premium/v1/weather.ashx?format=json&key=e2093a0d363d40d7a4982453202704&query="
@@ -21,8 +21,8 @@ class Activity() : AppCompatActivity() {
         setContentView(R.layout.weather_layout)
 
         val Intent = getIntent()
-        cityModel  = Intent.getParcelableExtra("history")
-        query = cityModel.City.toString()
+        cityModel  = Intent.getParcelableExtra("city")
+        cityWeather = cityModel.City
         wordViewModel = ViewModelProvider(this).get(WeatherView::class.java)
         Weather()
     }
@@ -46,7 +46,7 @@ class Activity() : AppCompatActivity() {
                 wordViewModel.insert(cityModel)
             }
         }
-        val WeatherSearch = wordViewModel.getDeatail(url +query+"")
+        val WeatherSearch = wordViewModel.getDeatail(url +cityWeather+"")
         temp_C.setText(WeatherSearch.tempC.toString() + "°C")
         weatherDesc.setText(WeatherSearch.weatherDesc.toString())
         Picasso.get().load(WeatherSearch.weatherIconUrl.toString()).into(image)

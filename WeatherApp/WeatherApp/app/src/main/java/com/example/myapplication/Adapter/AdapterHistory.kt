@@ -28,7 +28,7 @@ class AdapterHistory (var models: List<CityModel>) : RecyclerView.Adapter<Adapte
             MessageViewHolder.itemView.setOnClickListener {
                 var Model : CityModel = models.get(MessageViewHolder.adapterPosition)
                 val Intent = Intent(Context, Activity::class.java)
-                Intent.putExtra("history",Model)
+                Intent.putExtra("city",Model)
                 Context.startActivity(Intent)
             }
         }

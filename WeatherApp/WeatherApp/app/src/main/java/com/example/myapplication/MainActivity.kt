@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity()  {
     var arraylist = ArrayList<CityModel>()
     val adapter = AdapterHistory(arraylist)
     val url = "http://api.worldweatheronline.com/premium/v1/search.ashx?format=json&key=e2093a0d363d40d7a4982453202704&query="
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
