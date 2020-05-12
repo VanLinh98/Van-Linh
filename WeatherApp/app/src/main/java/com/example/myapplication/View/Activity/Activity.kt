@@ -25,11 +25,23 @@ class Activity() : AppCompatActivity() {
         cityWeather = cityModel.City
         wordViewModel = ViewModelProvider(this).get(WeatherView::class.java)
         Weather()
+        History()
+    }
+    fun History()
+    {
+        city.setText(cityModel.City)
+        wordViewModel.delete(cityModel)
+        wordViewModel.insert(cityModel)
+        val DetailHistory = wordViewModel.getDeatail(url +cityWeather+"")
+        temp_C.setText(DetailHistory.tempC)
+        weatherDesc.setText(DetailHistory.weatherDesc)
+        Picasso.get().load(DetailHistory.weatherIconUrl).into(image)
+        humidity.setText(DetailHistory.humidity)
     }
 
     fun Weather()
     {
-        city.setText(cityModel.City.toString())
+        city.setText(cityModel.City)
         var count : Int = wordViewModel.countRow()
         if (count<10)
         {
@@ -37,8 +49,8 @@ class Activity() : AppCompatActivity() {
         }
         else
         {
-            val isValid = wordViewModel.getCityModel(cityModel.City.toString())
-            if (isValid == false){
+            val cityData = wordViewModel.getCityModel(cityModel.City)
+            if (cityData == false){
                 wordViewModel.delete(cityModel)
                 wordViewModel.insert(cityModel)
             }else {
@@ -47,9 +59,9 @@ class Activity() : AppCompatActivity() {
             }
         }
         val WeatherSearch = wordViewModel.getDeatail(url +cityWeather+"")
-        temp_C.setText(WeatherSearch.tempC.toString() + "°C")
-        weatherDesc.setText(WeatherSearch.weatherDesc.toString())
-        Picasso.get().load(WeatherSearch.weatherIconUrl.toString()).into(image)
+        temp_C.setText(WeatherSearch.tempC + "°C")
+        weatherDesc.setText(WeatherSearch.weatherDesc)
+        Picasso.get().load(WeatherSearch.weatherIconUrl).into(image)
         humidity.setText(WeatherSearch.humidity + "%")
     }
 }

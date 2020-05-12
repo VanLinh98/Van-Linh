@@ -38,7 +38,7 @@ class WeatherView(application: Application) : AndroidViewModel(application) {
     }
     fun getSearch(query: String) : ArrayList<CityModel>
     {
-        return repository.getCity(query)
+        return repository.getCity(query) as ArrayList<CityModel>
     }
     fun getDeatail(query: String) : WeatherModel
     {

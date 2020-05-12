@@ -1,15 +1,18 @@
-package com.example.myapplication
+package com.example.myapplication.View.Activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.Model.DataClass.CityModel
-import com.example.myapplication.View.Adapter.AdapterHistory
+import com.example.myapplication.R
+import com.example.myapplication.Adapter.AdapterHistory
 import com.example.myapplication.ViewModel.WeatherView
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -46,9 +49,15 @@ class MainActivity : AppCompatActivity()  {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
             override fun onQueryTextSubmit(query: String): Boolean {
-                tvhistory.visibility = View.GONE
-                arraylist = cityViewModel.getSearch(url +query+"")
-                adapter.setWords(arraylist)
+                try {
+                    tvhistory.visibility = View.GONE
+                    arraylist = cityViewModel.getSearch(url +query+"")
+                    adapter.setWords(arraylist)
+                }catch (e : Exception){
+                    e.printStackTrace()
+                    Toast.makeText(this@MainActivity, "Không có thành phố bạn tìm", Toast.LENGTH_SHORT).show()
+                }
+
                 return true
             }
             override fun onQueryTextChange(newText: String): Boolean {

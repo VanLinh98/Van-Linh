@@ -1,5 +1,6 @@
 package com.example.myapplication.Model.Repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.myapplication.Model.DataClass.CityModel
 import com.example.myapplication.Model.DataClass.WeatherModel
@@ -12,6 +13,7 @@ import java.io.InputStreamReader
 import java.lang.StringBuilder
 import java.net.MalformedURLException
 import java.net.URL
+
 
 class WeatherRepository(private val wordDao: WordDao) {
 
@@ -31,8 +33,8 @@ class WeatherRepository(private val wordDao: WordDao) {
     }
     fun getCityModel(cityModel : String) : Boolean
     {
-       val cityModel = wordDao.GetCityModel(cityModel)
-        if (cityModel == null)
+       val city = wordDao.GetCityModel(cityModel)
+        if (city == null)
             return true
         else
             return false
@@ -43,8 +45,11 @@ class WeatherRepository(private val wordDao: WordDao) {
         return response
     }
     fun getCity(query: String) = runBlocking {
-        val arrayList: Deferred<ArrayList<CityModel>> = async { JsonCity(query)  }
-        return@runBlocking arrayList.await()
+        val arrayList: Deferred<ArrayList<CityModel>> = async {
+                JsonCity(query)
+        }
+            return@runBlocking arrayList.await()
+
     }
 
     fun getWeather(query: String) = runBlocking {
@@ -62,6 +67,7 @@ class WeatherRepository(private val wordDao: WordDao) {
             while ({ line = bufferedReader.readLine(); line }() != null) {
                 content.append(line)
             }
+
         } catch (e: MalformedURLException) {
             e.printStackTrace()
         } catch (e: IOException) {
@@ -74,24 +80,24 @@ class WeatherRepository(private val wordDao: WordDao) {
     {
         val a : String = getResponse(json)
         var arraylist = ArrayList<CityModel>()
-        try {
-            val json = JSONObject(a)
-            val jsonObject = json.getJSONObject("search_api")
-            val jsonArray = jsonObject.getJSONArray("result")
-            for (i in 0..jsonArray.length()-1) {
-                val JSONObject = jsonArray.getJSONObject(i)
-                val JSONArrayarea = JSONObject.getJSONArray("areaName")
-                for (j in 0..JSONArrayarea.length()-1 )
-                {
-                    val JSONObjectvalue = JSONArrayarea.getJSONObject(j)
-                    var value : String = JSONObjectvalue.getString("value")
-                    arraylist.add(CityModel(value))
+            try {
+                val json = JSONObject(a)
+                val jsonObject = json.getJSONObject("search_api")
+                val jsonArray = jsonObject.getJSONArray("result")
+                for (i in 0..jsonArray.length() - 1) {
+                    val JSONObject = jsonArray.getJSONObject(i)
+                    val JSONArrayarea = JSONObject.getJSONArray("areaName")
+                    for (j in 0..JSONArrayarea.length() - 1) {
+                        val JSONObjectvalue = JSONArrayarea.getJSONObject(j)
+                        var value: String = JSONObjectvalue.getString("value")
+                        arraylist.add(CityModel(value))
+                    }
                 }
-            }
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
+            } catch (e: IOException) {
+                    e.printStackTrace()
+                }
         return  arraylist
+
     }
 
     suspend fun JsonWeather(json: String) : WeatherModel
@@ -119,5 +125,4 @@ class WeatherRepository(private val wordDao: WordDao) {
         }
         return weather
     }
-
 }
