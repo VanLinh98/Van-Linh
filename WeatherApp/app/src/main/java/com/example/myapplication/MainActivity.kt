@@ -1,8 +1,7 @@
-package com.example.myapplication.View.Activity
+package com.example.myapplication
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.View
 import android.widget.Toast
@@ -11,7 +10,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.Model.DataClass.CityModel
-import com.example.myapplication.R
 import com.example.myapplication.Adapter.AdapterHistory
 import com.example.myapplication.ViewModel.WeatherView
 import kotlinx.android.synthetic.main.activity_main.*

@@ -47,22 +47,22 @@
     <property name="AnalyzeApkAction.lastApkPath" value="$PROJECT_DIR$/build/outputs/apk/debug/app-debug.apk" />
     <property name="ApkExportedModule" value="app" />
     <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="Pixel_2_API_24" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-05-06T06:54:33.724Z" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-05-21T04:29:25.302Z" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/test/java/com/example/myapplication" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/build/outputs/apk/debug/app-debug.apk" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
       <recent name="com.example.myapplication" />
     </key>
     <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="com.example.myapplication" />
       <recent name="com.example.myapplication.View.Activity" />
       <recent name="com.example.myapplication.Adapter" />
       <recent name="com.example.myapplication.View.Adapter" />
       <recent name="com.example.myapplication.View" />
-      <recent name="com.example.myapplication.Model.Repository" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -83,7 +83,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Android App.app">
+  <component name="RunManager" selected="Android JUnit.MainActivityTest">
     <configuration name="MainActivityTest" type="AndroidJUnit" factoryName="Android JUnit" temporary="true" nameIsGenerated="true">
       <module name="app" />
       <extension name="coverage">
@@ -324,9 +324,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Android App.MainActivity" />
-        <item itemvalue="Android Instrumented Tests.search()" />
         <item itemvalue="Android JUnit.MainActivityTest" />
+        <item itemvalue="Android Instrumented Tests.search()" />
+        <item itemvalue="Android App.MainActivity" />
         <item itemvalue="Android Instrumented Tests.clickItem()" />
         <item itemvalue="Android JUnit.firstTest.testCase" />
       </list>
